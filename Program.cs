@@ -1,4 +1,5 @@
-﻿using Spire.Pdf;
+﻿using Aspose.Words.Bibliography;
+using Spire.Pdf;
 using Spire.Pdf.Graphics;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -33,7 +34,12 @@ for (int i = 0; i < pdf1.Pages.Count; i++)
     {
         for (int y = 0; y < source1.Height; y++)
         {
-            if (source1.GetPixel(x, y) != source2.GetPixel(x, y))
+            Color currentColor1 = source1.GetPixel(x, y);
+            Color currentColor2 = source2.GetPixel(x, y);
+
+            if (Math.Abs(currentColor1.R - currentColor2.R) > 30
+                || Math.Abs(currentColor1.G - currentColor2.G) > 30
+                || Math.Abs(currentColor1.B - currentColor2.B) > 30)
             {
                 source1.SetPixel(x, y, Color.Purple);
             }
