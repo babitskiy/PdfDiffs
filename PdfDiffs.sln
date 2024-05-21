@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfDiffs", "PdfDiffs.csproj", "{B1745A6D-E03E-457C-89A7-8608BFC8CCC9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1745A6D-E03E-457C-89A7-8608BFC8CCC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1745A6D-E03E-457C-89A7-8608BFC8CCC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1745A6D-E03E-457C-89A7-8608BFC8CCC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1745A6D-E03E-457C-89A7-8608BFC8CCC9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A2EAB699-F626-4CC9-98B8-DF4F0167EC3B}
+	EndGlobalSection
+EndGlobal
