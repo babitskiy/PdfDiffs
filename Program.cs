@@ -4,26 +4,28 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
 
-//Создайте экземпляр PdfDocument
+// Создание экземпляров PdfDocument
 PdfDocument pdf1 = new();
 PdfDocument pdf2 = new();
 
-//Загрузка образца документа PDF
+// Загрузка образцов документов PDF
 pdf1.LoadFromFile("t1.pdf");
 pdf2.LoadFromFile("t2.pdf");
 
-//Просматривайте каждую страницу в PDF
-for (int i = 0; i < 1; i++)
+int minPagesCount = Math.Min(pdf1.Pages.Count, pdf2.Pages.Count);
+
+// Просмотр каждой страницы PDF
+for (int i = 0; i < minPagesCount; i++)
 {
-    //Преобразуйте все страницы в изображения и установите разрешение на дюйм для изображений
+    // Преобразование всех страниц в изображения и установка разрешения на дюйм для изображений
     Image image1 = pdf1.SaveAsImage(i, PdfImageType.Bitmap, 500, 500);
     Image image2 = pdf2.SaveAsImage(i, PdfImageType.Bitmap, 500, 500);
 
-    //Сохранить изображения в формате JPG в указанную папку 
-    string fileJpg1 = @$"Image\\t1-{DateTime.Now.ToString("dd.MM.yyyy", CultureInfo.InvariantCulture)}.jpg";
+    // Сохранить изображения в формате JPG в указанную папку 
+    string fileJpg1 = @$"Image\\t1-{DateTime.Now.ToString("dd.MM.yyyy", CultureInfo.InvariantCulture)}-page{i + 1}.jpg";
     image1.Save(fileJpg1, ImageFormat.Jpeg);
 
-    string fileJpg2 = @$"Image\\t2-{DateTime.Now.ToString("dd.MM.yyyy", CultureInfo.InvariantCulture)}.jpg";
+    string fileJpg2 = @$"Image\\t2-{DateTime.Now.ToString("dd.MM.yyyy", CultureInfo.InvariantCulture)}-page{i + 1}.jpg";
     image2.Save(fileJpg2, ImageFormat.Jpeg);
 
     Bitmap source1 = new Bitmap(fileJpg1);
@@ -31,7 +33,8 @@ for (int i = 0; i < 1; i++)
 
     Console.WriteLine("Загрузка");
 
-    //source1.MakeTransparent();
+    //source1.MakeTransparent(); // Сделать фон прозрачным
+
     for (int x = 0; x < source1.Width; x++)
     {
         for (int y = 0; y < source1.Height; y++)
@@ -47,7 +50,7 @@ for (int i = 0; i < 1; i++)
         }
 
         if (x % 82 == 0)
-            Console.WriteLine($"Загрузка {x / 82} / {source1.Width / 82}");
+            Console.WriteLine($"Загрузка страницы №{i + 1}. Прогресс: {x / 82} / {source1.Width / 82}");
     }
-    source1.Save($"Image\\ComparedFile-{DateTime.Now.ToString("dd.MM.yyyy", CultureInfo.InvariantCulture)}.jpg");
+    source1.Save($"Image\\ComparedFile-{DateTime.Now.ToString("dd.MM.yyyy", CultureInfo.InvariantCulture)}-page{i + 1}.jpg");
 }
