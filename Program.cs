@@ -4,6 +4,11 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
 
+string projectPath = Directory.GetCurrentDirectory();
+
+CreateFolder("TemporaryFiles");
+CreateFolder("ComparedFiles");
+
 // Создание экземпляров PdfDocument
 PdfDocument pdf1 = new();
 PdfDocument pdf2 = new();
@@ -22,10 +27,10 @@ for (int i = 0; i < minPagesCount; i++)
     Image image2 = pdf2.SaveAsImage(i, PdfImageType.Bitmap, 500, 500);
 
     // Сохранить изображения в формате JPG в указанную папку 
-    string fileJpg1 = @$"Image\\t1-{DateTime.Now.ToString("dd.MM.yyyy", CultureInfo.InvariantCulture)}-page{i + 1}.jpg";
+    string fileJpg1 = @$"TemporaryFiles\\t1-{DateTime.Now.ToString("dd.MM.yyyy", CultureInfo.InvariantCulture)}-page{i + 1}.jpg";
     image1.Save(fileJpg1, ImageFormat.Jpeg);
 
-    string fileJpg2 = @$"Image\\t2-{DateTime.Now.ToString("dd.MM.yyyy", CultureInfo.InvariantCulture)}-page{i + 1}.jpg";
+    string fileJpg2 = @$"TemporaryFiles\\t2-{DateTime.Now.ToString("dd.MM.yyyy", CultureInfo.InvariantCulture)}-page{i + 1}.jpg";
     image2.Save(fileJpg2, ImageFormat.Jpeg);
 
     Bitmap source1 = new Bitmap(fileJpg1);
@@ -52,5 +57,14 @@ for (int i = 0; i < minPagesCount; i++)
         if (x % 82 == 0)
             Console.WriteLine($"Загрузка страницы №{i + 1}. Прогресс: {x / 82} / {source1.Width / 82}");
     }
-    source1.Save($"Image\\ComparedFile-{DateTime.Now.ToString("dd.MM.yyyy", CultureInfo.InvariantCulture)}-page{i + 1}.jpg");
+
+    source1.Save($"ComparedFiles\\ComparedFile-{DateTime.Now.ToString("dd.MM.yyyy", CultureInfo.InvariantCulture)}-page{i + 1}.jpg");
+}
+
+void CreateFolder(string folderName)
+{
+    string folderPath = Path.Combine(projectPath, folderName);
+
+    if (!Directory.Exists(folderPath))
+        Directory.CreateDirectory(folderPath);
 }
